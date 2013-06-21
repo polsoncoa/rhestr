@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>SWPPP Data Explorer and Library</title>
+
+  <datalist id="finallist">
+		<option value="Water/Sewer">
+		<option value="Streets">
+		<option value="Sign and Striping">
+		<option value="Parks/Trails/Medians">
+		<option value="Storm Drain/Drainage">
+		<option value="Certificate of Occupancy">
+		<option value="Signals/Lighting">	
+</datalist>
+<datalist id="wxlist">
+		<option value="Clear">
+		<option value="Cloudy">
+		<option value="Rain">
+		<option value="Snow">
+		<option value="Windy">
+</datalist>
+<datalist id="phaselist">
+		<option value="Not Disturbed or Seeded and Stabilized">
+		<option value="Clearing and Grubbing">
+		<option value="Mass Grading">
+		<option value="Infrastructure Construction">
+		<option value="Home Building Construction">
+		<option value="95% Build Out">
+		<option value="Complete/Stabilized">
+</datalist>
+<datalist id="followupconcern">
+		<option value="Needs Immediate Attention">
+		<option value="Check with next inspection">
+		<option value="Violation">
+</datalist>
+
+<datalist id="followupstatus">
+		<option value="No action">
+		<option value="Resolved">
+		<option value="Beginning Fines">
+		<option value="Forward for administrative review">
+</datalist>
+<datalist id="projecttype">
+		<option value="Work Order">
+		<option value="SWPPP Only">
+		<option value="Miscellaneous">
+		<option value="Other">
+</datalist>
+<datalist id="inspectors">
+		<option value="Benavidez, O">
+		<option value="Blair, H">
+		<option value="Sandoval, A">
+		<option value="Olson, P">
+</datalist>
+</head>
+
+<!-- Here be errors and typos, Or the start of the page at least -->
+<body>
+   
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="recline/"><strong>Rhestr</strong> &ndash; your offline datastore</a>
+      <ul class="nav">
+        <li>
+          <a href="index.html">
+            <i class="icon-book icon-white"></i>
+            Data Viewer
+          </a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="recline/docs/tutorials.html">
+            <i class="icon-road icon-white"></i>
+            Tutorials
+          </a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="SWPPPform.html">
+            <i class="icon-pencil icon-white"></i>
+            Enter Inspection
+          </a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="Updatedata.html">
+			<i class="icon-download-alt icon-white"></i>
+            Reload Database
+          </a>
+        </li>
+      </ul>
+      <ul class="nav pull-right">
+        <li>
+          <a href="#account">
+            <i class="icon-download-alt icon-white"></i>
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>   
+
+<div id="account">sadf</div>
+
+<div class="tabs">
+<ul class="nav nav-tabs" id="myTab">
+  <li><a href="#findprojectform" data-toggle="tab">Find Project</a></li>	
+  <li><a href="#oversightform" data-toggle="tab">Workorder Inspection</a></li>
+  <li><a href="#fullform" data-toggle="tab">SWPPP Full Inspection</a></li>
+  <li><a href="#shortform" data-toggle="tab">SWPPP Short Inspection</a></li>
+   <li><a href="#Projectform" data-toggle="tab">Enter New Project</a></li>
+</ul>
+</div>
+
+<div class="tab-content">
+<!-- Begin FindProjectform Button Number 5-->
+ <div class="tab-pane active" id="findprojectform">
+<div class="container">
+ <div data-role="content">
+<form id="findprojectform" action="#" method="get" class="well form-inline">
+<fieldset>
+     <h2>Find Project</h2>
+    
+ </fieldset>  
+ </form>
+</div>
+</div>
+</div>
+
+<!-- End of FindProjectForm 5-->
+<!-- Begin Oversight  form 3-->
+ <div class="tab-pane" id="oversightform">
+<div class="container">
+ <div data-role="content">
+<form id="oversightform" action="#" method="get" class="well form-inline">
+<fieldset>
+     <h2>Oversight Inspection Form</h2>
+     <div class="control-group">
+ 		<div class="controls">
+ 			<label class="control-label" for="project">Project</label>
+ 			<input type="text" name="project" input id="addprojectname3" required placeholder="Project Name"> 
+ 			<label class="control-label" for="projectnumber">Project number</label>
+ 			<input type="text" name="projectnumber" input id="addprojectnumber3" required placeholder="Project Number"> 
+ 		</div>
+		<div class="controls">
+           	         <label class="control-label" for="inspdate">Inspection Date</label>
+           		<input type="date" name="inspdate" input id="addinspdate3"> 
+           		<label class="control-label" >Weather</label>
+			<input list="wxlist" name="wx" input id="addwx3" required placeholder="Weather"> 
+		</div>
+		<div class="controls">
+			<label class="control-label" >Is follow-up required?</label>
+			<label class="radio">
+			<input type="radio" name="followupneed" input id="addfollowupneed3" value="true">
+			<span class="label label-success">Yes</span>
+			</label>
+			<label class="radio">
+			<input type="radio" name="followupneed" input id="addfollowupneed3" value="false">
+			<span class="label label-important">No</span>
+			</label>
+			<label class="control-label" >Final Type</label>
+			<input list="finallist" name="final" input id="addfinal3" required placeholder="Aaaagh!">
+		</div>
+		<div class="controls" >
+			<label class="control-label" for="notes">Inspection Log</label>
+			<textarea id="addnotes3"  class="span6">	
+			</textarea>
+		</div>
+	</div>
+     	    <a href="#addSubmitButton3" id="addSubmitButton3" button class="btn btn-large btn-primary" type="button">Submit</a>
+            <a href="/rhestr/_design/app/index.html" id="addCancelButton" button class="btn btn-large btn-danger" type="button">Cancel</a>
+ </fieldset>  
+ </form>
+</div>
+</div>
+</div>
+
+<!-- End of Oversight Form-->
+<div class="tab-pane" id="fullform">
+<div class="container">
+
+<div id="addSWPPP" data-role="page" class="span12">
+<div data-role="content">
+<form id="SWPPPFullForm" action="#" method="get" class="well form-inline">
+<fieldset>
+<h2>SWPPP Quality Assurance Inspection</h2>
+     <h3>General Information</h3>
+     <div class="control-group">
+ 		<div class="controls">
+ 			<label class="control-label" for="project">Project</label>
+ 			<input type="text" name="project" input id="addprojectname1" required placeholder="Project Name"> 
+ 			<label class="control-label" for="projectnumber">Project number</label>
+ 			<input type="text" name="projectnumber" input id="addprojectnumber1" required placeholder="Project SWPPP Number"> 
+ 			<label class="control-label" for="phase">Project Phase</label>
+ 			<input list="phaselist" name="phase" input id="addphase1" required placeholder="How far are we?"> 
+		</div>
+		<div class="controls">
+           		<label class="control-label" for="inspdate">Inspection Date</label>
+           		<input type="date" name="inspdate" input id="addinspdate1"> 
+		</div>
+	</div>
+
+  <h3>SWPPP (Paperwork) Information</h3>
+ <div class="controls">
+		<label class="control-label" >SWPPP Sign Visible</label>
+		<label class="radio">
+		<input type="radio" name="swpppsign" input id="addswpppsign1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="swpppsign" input id="addswpppsign1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+
+<div class="controls">
+  	<label class="control-label" >Does SWPPP book reflect current progress of the project?</label>
+	<label class="radio">
+	<input type="radio" name="swpppgood" input id="addswpppgood1" value="true">
+    	<span class="label label-success">Yes</span>
+	</label>
+  	<label class="radio">
+  	<input type="radio" name="swpppgood" input id="addswpppgood1" value="false">
+  	<span class="label label-important">No</span>
+  	</label>
+	</div>
+    	
+	<div class="controls" >
+	<label class="control-label" for="swpppcomments">List changes needed</label>
+	<textarea id="addswpppcomments1"  class="span6" required placeholder="Notes for Inspection">	
+	</textarea>
+	</div>
+<h3>SWPPP (Paperwork) Inspection</h3>
+	<div class="controls">
+ 		<label class="control-label" >SWPPP Inspection Frequency</label>
+ 	</div>
+	<div class="controls">
+		<label class="radio">
+		<input type="radio" name="inspfreq" input id="addinspfreq1" value="At least once every 7 calendar days">
+		<span class="label label-info">At least once every 7 calendar days</span>
+		</label>
+		<label class="radio">
+  		<input type="radio" name="inspfreq" input id="addinspfreq1" value="At least every 14 calendar days and within 24 hours of the end of a storm event of 0.25 inches or greater">
+  		<span class="label label-info">At least every 14 calendar days and within 24 hours of the end of a storm event of 0.25 inches or greater</span>
+  		</label>
+  		</div>
+	<div class="controls">
+  		<label class="control-label" >Are inspections performed and documented at  the above frequency</label>
+  		<label class="radio">
+  		<input type="radio" name="inspfreqcheck" input id="addinspfreqcheck1" value="true">
+  		<span class="label label-success">Yes</span>
+  		</label>
+  		<label class="radio">
+  		<input type="radio" name="inspfreqcheck" input id="addinspfreqcheck1" value="false">
+  		<span class="label label-important">No</span>
+  		</label>
+	</div>
+	
+	
+	<div class="controls">
+		<label class="control-label" >Are inspections reports in SWPPP</label>
+		<label class="radio">
+		<input type="radio" name="inspswppp" input id="addinspswppp1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="inspswppp" input id="addinspswppp1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+	<div class="controls">
+		<label class="control-label" >Are borrow and waste areas inspected as part of project?</label>
+		<label class="radio">
+		<input type="radio" name="swpppborrow" input id="addswpppborrow1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="swpppborrow" input id="addswpppborrow1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+	<div class="controls">
+		<label class="control-label" >Do borrow and waste areas have necessary BMPs in place?</label>
+		<label class="radio">
+		<input type="radio" name="borrowbmp" input id="addborrowbmp1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="borrowbmp" input id="addborrowbmp1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+	<div class="controls">
+		<label class="control-label" >Are inspections signed by Signatory Official (Tab 4 of SWPPP)</label>
+		<label class="radio">
+		<input type="radio" name="inspsignature" input id="addinspsignature1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="inspsignature" input id="addinspsignature1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+  <h3>BMPs on the Ground Actually Effecting Water Quality</h3>
+ 	<div class="controls">
+		<label class="control-label" >Are perimeter controls established outside of all work areas</label>
+		<label class="radio">
+		<input type="radio" name="bmpperimeter" input id="addbmpperimeter1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="bmpperimeter" input id="addbmpperimeter1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+	Are permament and temporary control practices properly installed and maintained?
+	<div class="controls">
+		<label class="control-label" >Erosion controls</label>
+		<label class="radio">
+		<input type="radio" name="bmperosion" input id="addbmperosion1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="bmperosion" input id="addbmperosion1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+		<label class="control-label" >Sediment controls</label>
+		<label class="radio">
+		<input type="radio" name="bmpsediment" input id="addbmpsediment1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="bmpsediment" input id="addbmpsediment1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+	<div class="controls">
+		<label class="control-label" for="bmpcomments">If NO to above questions, what corrective action is recommended</label>
+		<textarea id="addbmpcomments1" class="span10" required placeholder="Comments on BMPS">	
+		</textarea>
+	</div>
+	<div class="controls">
+		<label class="control-label" >Are BMPs being selected, installed , implemented, and maintained as stated in the SWPPP?</label>
+		<label class="radio">
+		<input type="radio" name="bmpperswppp" input id="addbmpperswppp1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="bmpperswppp" input id="addbmpperswppp1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+	<div class="controls">
+		<label class="control-label" >Is the SWPPP being updated as needed to address problems and construction activities?</label>
+		<label class="radio">
+		<input type="radio" name="swpppmatchphase" input id="addswpppmatchphase1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="swpppmatchphase" input id="addswpppmatchphase1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+	<div class="controls">
+		<label class="control-label" >Are the BMPs adequate for water quality measures?</label>
+		<label class="radio">
+		<input type="radio" name="bmpgood" input id="addbmpgood1" value="true">
+		<span class="label label-success">Yes</span>
+		</label>
+		<label class="radio">
+		<input type="radio" name="bmpgood" input id="addbmpgood1" value="false">
+		<span class="label label-important">No</span>
+		</label>
+	</div>
+		<div class="controls" >
+			<label class="control-label" for="issuecomments">Describe issue and recommended actions</label>
+			<textarea id="addissuecomments1"  class="span6" required placeholder="Please provide a detailed description of concerns and actions that are needed to resolve the issue">	
+			</textarea>
+		</div>
+	<div class="controls">
+			<label class="control-label" >Is follow-up required?</label>
+			<label class="radio">
+			<input type="radio" name="followupneed" input id="addfollowupneed1" value="true">
+			<span class="label label-success">Yes</span>
+			</label>
+			<label class="radio">
+			<input type="radio" name="followupneed" input id="addfollowupneed1" value="false">
+			<span class="label label-important">No</span>
+			</label>
+			<label class="control-label" >Rate concern of item</label>
+			<input list="followupconcern" name="rating" input id="addrating1" required placeholder="Aaaagh!"> 
+		</div>
+
+     	    <a href="#addSubmitButton" id="addSubmitButton" button class="btn btn-large btn-primary" type="button">Submit</a>
+            <a href="/rhestr/_design/app/index.html" id="addCancelButton" button class="btn btn-large btn-danger" type="button">Cancel</a>
+ </fieldset>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!-- Begin SWPPP Quick form -->
+ <div class="tab-pane" id="shortform">
+ <div class="container">
+<div data-role="content">
+<form id="rhestrSWPPPfollowupform" action="#" method="get" class="well form-inline">
+<fieldset>
+     <h2>SWPPP Quick Inspection Form</h2>
+     <div class="control-group">
+ 		<div class="controls">
+ 			<label class="control-label" for="project">Project</label>
+ 			<input type="text" name="project" input id="addprojectname2" required placeholder="Project Name"> 
+ 			<label class="control-label" for="projectnumber">Project number</label>
+ 			<input type="text" name="projectnumber" input id="addprojectnumber2" required placeholder="Project SWPPP Number"> 
+ 		</div>
+		<div class="controls">
+           	         <label class="control-label" for="inspdate">Inspection Date</label>
+           		<input type="date" name="inspdate" input id="addinspdate2"> 
+		</div>
+		<div class="controls">
+			<label class="control-label" >Is follow-up required?</label>
+			<label class="radio">
+			<input type="radio" name="followupneed" input id="addfollowupneed2" value="true">
+			<span class="label label-success">Yes</span>
+			</label>
+			<label class="radio">
+			<input type="radio" name="followupneed" input id="addfollowupneed2" value="false">
+			<span class="label label-important">No</span>
+			</label>
+			<label class="control-label" >Rate concern of item</label>
+			<input list="followupconcern" name="rating" input id="addrating2" required placeholder="Aaaagh!"> 
+		</div>
+		<div class="controls" >
+			<label class="control-label" for="issuecomments">Describe issue and recommended actions</label>
+			<textarea id="addissuecomments2"  class="span6" required placeholder="Please provide a detailed description of concerns and actions that are needed to resolve the issue">	
+			</textarea>
+		</div>
+	</div>
+     	    <a href="#addSubmitButton2" id="addSubmitButton2" button class="btn btn-large btn-primary" type="button">Submit</a>
+            <a href="/rhestr/_design/app/index.html" id="addCancelButton" button class="btn btn-large btn-danger" type="button">Cancel</a>
+ </fieldset>  
+ </form>
+</div>
+</div>
+</div>
+<!-- End of SWPPP Quick Form button 4-->
+<!-- Begin Project form -->
+ <div class="tab-pane" id="Projectform">
+ <div class="container">
+<div data-role="content">
+<form id="rhestrProjectform" action="#" method="get" class="well form-inline">
+<fieldset>
+     <h2>Enter New Project Form</h2>
+     <div class="control-group">
+ 		<div class="controls">
+ 			<label class="control-label" for="project">Project</label>
+ 			<input type="text" name="project" input id="addprojectname4" required placeholder="Project Name"> 
+ 			<label class="control-label" for="projectnumber">Project number</label>
+ 			<input type="text" name="projectnumber" input id="addprojectnumber4" required placeholder="Project WO # or ESC #"> 
+ 		<div class="controls">
+ 			<label class="control-label" >Type of Project</label>
+			<input list="projecttype" name="projecttype" input id="addprojecttype4" required placeholder="Click for types"> 	
+			<label class="control-label" for="epanoi">EPA NOI</label>
+ 			<input type="text" name="epanoi" input id="addepanoi4" required placeholder="EPA NOI NMR#####">
+ 		</div>
+ 		<div class="controls">
+ 			<label class="control-label" for="contractor">Contractor</label>
+ 			<input type="text" name="contractort" input id="addcontractor4" required placeholder="Contractor or Owner"> 
+ 			<label class="control-label" for="consultant">Consultant Inspector</label>
+ 			<input type="text" name="consultant" input id="addconsultant4" required placeholder="Consultant or SWPPP Inspector"> 
+ 		</div>
+ 		<div class="controls">
+ 			<label class="control-label" for="latitude">Latitude</label>
+ 			<input type="text" name="latitude" input id="addlatitude4" required placeholder="##.#####"> 
+ 			<label class="control-label" for="longitude">Longitude</label>
+ 			<input type="text" name="longitude" input id="addlongitude4" required placeholder="###.##### positive"> 
+ 		</div>
+ 		<div class="controls">
+ 			<label class="control-label" for="inspector">Inspector</label>
+ 			<input list="inspectors" name="inspector" input id="addinspector4" required placeholder="City Inspector"> 
+ 		</div>
+
+	</div>
+     	    <a href="#addSubmitButton4" id="addSubmitButton4" button class="btn btn-large btn-primary" type="button">Submit</a>
+            <a href="/rhestr/_design/app/index.html" id="addCancelButton" button class="btn btn-large btn-danger" type="button">Cancel</a>
+ </fieldset>  
+ </form>
+</div>
+</div>
+</div>
+<!-- End of Project Form-->
+</div>
+
+</body>
+  <!-- 3rd party JS libraries -->
+  <script type="text/javascript" src="recline/vendor/jquery/1.7.1/jquery.js"></script>
+  <script type="text/javascript" src="recline/vendor/underscore/1.1.6/underscore.js"></script>
+  <script type="text/javascript" src="recline/vendor/backbone/0.5.1/backbone.js"></script>
+  <script type="text/javascript" src="recline/vendor/mustache/0.5.0-dev/mustache.js"></script>
+  <script type="text/javascript" src="recline/vendor/bootstrap/2.0.2/bootstrap.js"></script>
+  <script type="text/javascript" src="recline/vendor/json2.js"></script>
+  <script type="text/javascript" src="recline/vendor/jquery.couch.js"></script>
+  <script type="text/javascript" src="recline/vendor/sha1.js"></script>
+  <script type="text/javascript" src="recline/vendor/jquery.couchLogin.min.js"></script>  
+
+  <script type="text/javascript" charset="utf-8">
+$db = $.couch.db("rhestr");
+ 
+      function handleDocumentReady()
+      {
+          $("#home").bind( "pagebeforeshow", refreshRhestr);    
+//submitting the big form to couchdb
+          $("#addSubmitButton").live( "click", function( event ) {
+              event.preventDefault();
+                var document = {};
+                document.type="Inspections";
+                document.insptype = "SWPPP Full";
+              	document.projectname = $("input#addprojectname1").val();
+              	document.projectnumber = $("input#addprojectnumber1").val();
+              	document.inspector = username;
+              	document.inspectiondate = $("input#addinspdate1").val();
+              	document.phase = $("input#addphase1").val();	   
+               	document.swpppsign = $('input:radio[name=swpppsign1]:checked').val();
+              	document.swpppgood = $('input:radio[name=swpppgood1]:checked').val();	   
+              	document.swpppcomments = $("textarea#addswpppcomments1").val();
+              	document.inspfreq = $('input:radio[name=inspfreq1]:checked').val();
+              	document.inspfreqcheck = $('input:radio[name=inspfreqcheck1]:checked').val();
+              	document.inspswppp =$('input:radio[name=inspswppp1]:checked').val();
+              	document.swpppborrow = $('input:radio[name=swpppborrow1]:checked').val();	   
+              	document.borrowbmp = $('input:radio[name=borrowbmp1]:checked').val();
+              	document.inspsignature = $('input:radio[name=inspsignature1]:checked').val();
+              	document.bmpperimeter = $('input:radio[name=bmpperimeter1]:checked').val();
+              	document.bmperosion = $('input:radio[name=bmperosion1]:checked').val();
+              	document.bmpsediment = $('input:radio[name=bmpsediment1]:checked').val();
+                document.bmpcomments = $("textarea#addbmpcomments1").val();
+              	document.bmpperswppp = $('input:radio[name=bmpperswppp1]:checked').val();	   
+              	document.swpppmatchphase = $('input:radio[name=swpppmatchphase1]:checked').val();
+              	document.bmpgood = $('input:radio[name=bmpgood1]:checked').val();
+              	document.creation_date = ( new Date() ).getTime();
+              $db.saveDoc( document, {
+                      success: function() {
+                      	  window.location.replace("/rhestr/_design/app/index.html")
+                                               },
+                      error: function() {
+                          alert( "Cannot save new document." );
+                      }
+              });
+              return false;
+          });
+ //Submitting the quick form to couchdb
+          $("#addSubmitButton2").live( "click", function( event) {
+              event.preventDefault();
+                var document = {};
+                document.type="Inspections";
+                document.insptype = "SWPPP Quick";
+              	document.projectname = $("input#addprojectname2").val();
+              	document.projectnumber = $("input#addprojectnumber2").val();
+              	document.inspector = username;
+              	document.inspectiondate = $("input#addinspdate2").val();
+                document.swpppsign = $('input:radio[name=followpneed2]:checked').val();
+              	document.phase = $("input#addrating").val();
+                document.bmpcomments = $("textarea#addissuecomments2").val();
+              	document.creation_date = ( new Date() ).getTime();
+              $db.saveDoc( document, {
+                      success: function() {
+                      	  window.location.replace("/rhestr/_design/app/index.html")
+                                               },
+                      error: function() {
+                          alert( "Cannot save new document." );
+                      }
+              });
+              return false;
+          });
+//Submitting the oversight form to couchdb
+          $("#addSubmitButton3").live( "click", function( event) {
+              event.preventDefault();
+                var document = {};
+                document.type="Inspections";
+                document.projecttype = "Work Order";
+              	document.projectname = $("input#addprojectname3").val();
+              	document.projectnumber = $("input#addprojectnumber3").val();
+              	document.inspector = username;
+              	document.inspectiondate = $("input#addinspdate3").val();
+                document.swpppsign = $('input:radio[name=followpneed3]:checked').val();
+              	document.phase = $("input#addfinal3").val();
+                document.comments = $("textarea#addnotes3").val();
+              	document.creation_date = ( new Date() ).getTime();
+              $db.saveDoc( document, {
+                      success: function() {
+                      	  window.location.replace("/rhestr/_design/app/index.html")
+                                               },
+                      error: function() {
+                          alert( "Cannot save new document." );
+                      }
+              });
+              return false;
+          });
+ //Submitting the project form to couchdb
+          $("#addSubmitButton4").live( "click", function( event) {
+              event.preventDefault();
+                var document = {};
+                document.type="Projects";
+              	document.projectname = $("input#addprojectname4").val();
+              	document.projectnumber = $("input#addprojectnumber4").val();
+              	document.projecttype = $("input#addprojecttype4").val();
+              	document.epanoi = $("input#addepanoi4").val();
+              	document.inspector = $("input#addinspector4").val();
+              	document.contractor = $("input#addcontractor4").val();
+              	document.consultant = $("input#addconsultant4").val();
+          	document.latitude = $("input#addlatitude4").val();
+          	document.longitude = -$("input#addlongitude4").val();
+              	document.createdby = username;
+              	document.creation_date = ( new Date() ).getTime();
+              $db.saveDoc( document, {
+                      success: function() {
+                      	  window.location.replace("/rhestr/_design/app/index.html")
+                                               },
+                      error: function() {
+                          alert( "Cannot save new document." );
+                      }
+              });
+              return false;
+          });
+  //Clean up the form on page load
+          $("#addSWPPP").bind( "pagehide", function() {
+              $("input#addprojectname").val( "" );
+              $("input#addprojectnumber").val( "" );
+              $("input#addinspector").val( "" );
+              $("input#addinspdate").val( "" );
+              $("input#addphase").val( "" );	   
+              $("input#addswpppsign").val( "" );
+              $("input#addswpppgood").val( "" );	   
+              $("input#addswpppcomments").val( "" );
+              $("input#addinspfreq").val( "" );
+              $("input#addinspfreqcheck").val( "" );
+              $("input#addinspswppp").val( "" );
+              $("input#addswpppborrow").val();	   
+              $("input#addborrowbmp").val( "" );
+              $("input#addinspsignature").val( "" );
+              $("input#addbmpperimeter").val( "" );
+              $("input#addbmperosion").val( "" );
+              $("input#addbmpsediment").val( "" );
+              $("input#addbmpcomments").val( "" );
+              $("input#addbmpperswppp").val( "" );	   
+              $("input#addswpppmatchphase").val( "" );
+              $("input#addbmpgood").val( "" );
+          });
+      }
+ 
+      function refreshRhestr()
+      {
+          $("/rhestr/_design/app/swpppform.html").empty();
+      }
+      $(document).ready( handleDocumentReady );
+</script>
+<script type="text/javascript" charset="utf-8">
+
+   $("#account").couchLogin({
+    loggedIn : function(userCtx) {
+        alert("Hello "+userCtx.name);
+        username = userCtx.name;
+    }, 
+    loggedOut : function() {
+        alert("bye bye");
+    }
+});
+</script>   
+
+
+</html>
+
