@@ -69,6 +69,15 @@
 		<option value="Beginning Fines">
 		<option value="Forward for administrative review">
 </datalist>
+<datalist id="projectstatus">
+		<option value="Scheduling Precon">
+		<option value="Construction">
+		<option value="Finals">
+		<option value="Waiting for Closeout">
+		<option value="Closeout Submitted">
+		<option value="Closeout at Water Authority">
+		<option value="Closed">
+</datalist>
 </head>
 <body>
 <title>Over all top</title>
@@ -83,50 +92,53 @@
 <td class="search">
                 <h2>Search</h2>
                 <div>
-                    <input type="text" ng-model="searchtext" placeholder="search" ng-change="search()" />
-                    <input type="button" value="Search" ng-click="search()" />
+                    <input type="text" ng-model="searchinspectionstext" placeholder="search" ng-change="search()" />
+                    <input type="button" value="Searchinspections" ng-click="searchinspections()" />
                 </div>
 
-                <p class="info">{{searchinfo}}</p>
-                <p ng-repeat="result in searchresults">
-                    <a href="#" class="searchresult" ng-click="loadproject(result.id)">{{result.value}}</a>
+                <p class="info">{{searchinspectionsinfo}}</p>
+                <p ng-repeat="result in searchinspectionsresults">
+                    <a href="#" class="searchinspectionsresult" ng-click="loadinspection(resultinspections.id)">{{resultinspections.value}}</a>
                 </p>
-                <p class="info" ng-show="searchlimited">more...</p>
+                <p class="info" ng-show="searchinspectgionslimited">more...</p>
             </td>
-            </div>
+</div>
+
 <div class="span10">  
 <label class="checkbox">
     <input type="checkbox" ng-model="oneAtATime">
     Open only one at a time
   </label>
 <accordion close-others="oneAtATime">
-<accordion-group heading="Pick a Project">
 
-</accordion-group>
 <accordion-group heading="Review/Edit Project Information">
 <td class="project">
         <h2>Project</h2> 
           <td class="menu">
                 <span class="info">{{status}}</span>
                 <span ng-show="error != undefined" class="error">{{error}}</span>
-                <input type="button" value="New" ng-click="new()"  />
+                <input type="button" value="New" ng-click="newproject()"  />
                 <input type="button" value="Save" ng-click="saveproject()"  />
                 <input type="button" value="Delete" ng-click="deleteproject()"
                        ng-disabled="{{project._id == undefined}}" />
             </td>
                 <table>
                     <tr><th>Name</th><td><input type="text" ng-model="project.name" /></td><td></td><th>Type</th><td><input list="projecttype" ng-model="project.type" /></td></tr>
-                    <tr><th>Number</th><td><input type="text" ng-model="project.number" /></td><td></td><th>NOI #</th><td><input type="text" ng-model="project.noi" placeholder="NMR12#####"/></td></tr>
+                    <tr><th>Number</th><td><input type="text" ng-model="project.number" /></td>
+					<td></td><th>NOI #</th><td><input type="text" ng-model="project.noi" placeholder="NMR12#####"/></td></tr>
                     <tr><th>Contractor</th><td><input type="text" ng-model="project.contractor" /></td></tr>
                    <tr><th>Consultant</th><td><input type="text" ng-model="project.consultant" /></td></tr>
                    <tr><th>City Inspector</th><td><input list="inspectors" ng-model="project.inspector" /></td></tr> 
                 </table>
                	<br>
                	<table>
-                    <tr><th>Latitude</th><td><input type="text" ng-model="project.latitude"  placeholder="34.XXXX"/></td><td></td><th>Longitude</th><td><input type="text" ng-model="project.longitude" placeholder="-102.XXXX negative!" /></td></tr>
-                </table>
+                    <tr><th>Latitude</th><td><input type="text" ng-model="project.latitude"  placeholder="34.XXXX"/></td><td></td>
+					<th>Longitude</th><td><input type="text" ng-model="project.longitude" placeholder="-102.XXXX negative!" /></td></tr>
+                	<tr><th>Status</th><td><input list="projectstatus" ng-model="project.status" /></td><td></td>
+					<th>Closeout Date</th><td><input type="date" name="closeoutdate" ng-model="project.closeoutdate"></td></tr>
+				</table>
                	<br>
-               	<b>Contact</b><br>
+               	<h3>Contact</h3>
                	<div ng-repeat="contact in project.contact">
                     <select ng-model="contact.type">
                         <option value="Phone">Phone</option>
@@ -140,300 +152,55 @@
                     <input type="button" value="Add" ng-click="addContact()">
                 </p>
             </td>
- 
             <td class="reports">
-                <h2>Reports</h2>
+                <h3>Reports</h3>
                 <input type="button" value="Add" ng-click="addReport()">
                 <div ng-repeat="report in project.reports" class="report">
                     <table class="report">
-                        <tr><th>Date</th><td>
-                            <input type="text" ng-model="report.date" />
-                        </td><td>
-                            <a ng-click="removeReport(report)" class="remove" href="#">&times;</a>
-                        </td></tr>
-                        <tr><th>Bill</th><td><input type="text" ng-model="report.bill" /></td><td></td></tr>
-                        <tr><th>Payed</th><td><input type="checkbox" ng-model="report.payed" /></td><td></td></tr>
-                        <tr><th>Report</th><td>
-                            <textarea type="text" ng-model="report.report" class="report"></textarea>
-                        </td><td></td></tr>
+                        <tr><th>Resolved</th><td><input type="checkbox" ng-model="report.resolved" /></td></tr>
+						<tr><th>Date</th><td><input type="date" ng-model="report.date" /></td>
+                        <th>Report</th><td><input type="text" ng-model="report.report" /></td>
+						<td><a ng-click="removeReport(report)" class="remove" href="#">&times;</a></td></tr>
+                        <tr><th>Detail</th><td><textarea type="text" ng-model="report.detail" class="report"></textarea></td></tr>
                     </table>
                 </div>
             </td>
       </accordion-group>
 <!--   Inspection tabs -->
 <!--  Oversite  -->
-<accordion-group heading="Oversight Inspection">
-     <h2>Oversight Inspection Form {{project.name}}   {{project.number}}</h2>
-     <div class="control-group">
- 		<div class="controls">
-           	         <label class="control-label" for="inspdate">Inspection Date</label>
-           		<input type="date" name="inspdate" input id="addinspdate3"> 
-           		<label class="control-label" >Weather</label>
-			<input list="wxlist" name="wx" input id="addwx3" required placeholder="Weather"> 
-		</div>
-		<div class="controls">
-			<label class="control-label" >Is follow-up required?</label>
+<accordion-group  heading="Oversight Inspection">
+    <h2>Oversight Inspection Form <br>
+	{{project.name}} {{project.number}}</h2>
+	<h3>{{project._id}}</h3>
+    <form name="oversite" clss="css-form" novalidate>
+     	Inspection Date:<input type="date" name="inspdate" required ng-model="inspection.date"> 
+        Weather:<input list="wxlist" name="wx" ng-model="inspection.wx" required placeholder="Weather"> <br>
+		Is follow-up required?:
 			<label class="radio">
-			<input type="radio" name="followupneed" input id="addfollowupneed3" value="true">
+			<input type="radio" name="followupneed" ng-model="inspection.followupneed" value="true">
 			<span class="label label-success">Yes</span>
 			</label>
 			<label class="radio">
-			<input type="radio" name="followupneed" input id="addfollowupneed3" value="false">
+			<input type="radio" name="followupneed" ng-model="inspection.followupneed" value="false">
 			<span class="label label-important">No</span>
 			</label>
 			<label class="control-label" >Final Type</label>
-			<input list="finallist" name="final" input id="addfinal3" required placeholder="Aaaagh!">
-		</div>
+			<input list="finallist" name="final" ng-model="inspection.final" placeholder="Aaaagh!">
 		<div class="controls" >
 			<label class="control-label" for="notes">Inspection Log</label>
-			<textarea id="addnotes3"  class="span6">	
+			<textarea type="text" ng-model="inspection.notes" required class="input-xxlarge" rows=4>	
 			</textarea>
-		</div>
-	</div></accordion-group>
-
-<!--  Swppp Full  -->
-<accordion-group heading="SWPPP Full">
-<h2>SWPPP Quality Assurance Inspection</h2>
-     <h3>General Information</h3>
-     <div class="control-group">
- 		<div class="controls">
- 			<label class="control-label" for="project">Project</label>
- 			<input type="text" name="project" input id="addprojectname1" required placeholder="Project Name"> 
- 			<label class="control-label" for="projectnumber">Project number</label>
- 			<input type="text" name="projectnumber" input id="addprojectnumber1" required placeholder="Project SWPPP Number"> 
- 			<label class="control-label" for="phase">Project Phase</label>
- 			<input list="phaselist" name="phase" input id="addphase1" required placeholder="How far are we?"> 
-		</div>
-		<div class="controls">
-           		<label class="control-label" for="inspdate">Inspection Date</label>
-           		<input type="date" name="inspdate" input id="addinspdate1"> 
-		</div>
-	</div>
-
-  <h3>SWPPP (Paperwork) Information</h3>
- <div class="controls">
-		<label class="control-label" >SWPPP Sign Visible</label>
-		<label class="radio">
-		<input type="radio" name="swpppsign" input id="addswpppsign1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="swpppsign" input id="addswpppsign1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-
-<div class="controls">
-  	<label class="control-label" >Does SWPPP book reflect current progress of the project?</label>
-	<label class="radio">
-	<input type="radio" name="swpppgood" input id="addswpppgood1" value="true">
-    	<span class="label label-success">Yes</span>
-	</label>
-  	<label class="radio">
-  	<input type="radio" name="swpppgood" input id="addswpppgood1" value="false">
-  	<span class="label label-important">No</span>
-  	</label>
-	</div>
-    	
-	<div class="controls" >
-	<label class="control-label" for="swpppcomments">List changes needed</label>
-	<textarea id="addswpppcomments1"  class="span6" required placeholder="Notes for Inspection">	
-	</textarea>
-	</div>
-<h3>SWPPP (Paperwork) Inspection</h3>
-	<div class="controls">
- 		<label class="control-label" >SWPPP Inspection Frequency</label>
- 	</div>
-	<div class="controls">
-		<label class="radio">
-		<input type="radio" name="inspfreq" input id="addinspfreq1" value="At least once every 7 calendar days">
-		<span class="label label-info">At least once every 7 calendar days</span>
-		</label>
-		<label class="radio">
-  		<input type="radio" name="inspfreq" input id="addinspfreq1" value="At least every 14 calendar days and within 24 hours of the end of a storm event of 0.25 inches or greater">
-  		<span class="label label-info">At least every 14 calendar days and within 24 hours of the end of a storm event of 0.25 inches or greater</span>
-  		</label>
-  		</div>
-	<div class="controls">
-  		<label class="control-label" >Are inspections performed and documented at  the above frequency</label>
-  		<label class="radio">
-  		<input type="radio" name="inspfreqcheck" input id="addinspfreqcheck1" value="true">
-  		<span class="label label-success">Yes</span>
-  		</label>
-  		<label class="radio">
-  		<input type="radio" name="inspfreqcheck" input id="addinspfreqcheck1" value="false">
-  		<span class="label label-important">No</span>
-  		</label>
-	</div>
-	
-	
-	<div class="controls">
-		<label class="control-label" >Are inspections reports in SWPPP</label>
-		<label class="radio">
-		<input type="radio" name="inspswppp" input id="addinspswppp1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="inspswppp" input id="addinspswppp1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-	<div class="controls">
-		<label class="control-label" >Are borrow and waste areas inspected as part of project?</label>
-		<label class="radio">
-		<input type="radio" name="swpppborrow" input id="addswpppborrow1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="swpppborrow" input id="addswpppborrow1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-	<div class="controls">
-		<label class="control-label" >Do borrow and waste areas have necessary BMPs in place?</label>
-		<label class="radio">
-		<input type="radio" name="borrowbmp" input id="addborrowbmp1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="borrowbmp" input id="addborrowbmp1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-	<div class="controls">
-		<label class="control-label" >Are inspections signed by Signatory Official (Tab 4 of SWPPP)</label>
-		<label class="radio">
-		<input type="radio" name="inspsignature" input id="addinspsignature1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="inspsignature" input id="addinspsignature1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-  <h3>BMPs on the Ground Actually Effecting Water Quality</h3>
- 	<div class="controls">
-		<label class="control-label" >Are perimeter controls established outside of all work areas</label>
-		<label class="radio">
-		<input type="radio" name="bmpperimeter" input id="addbmpperimeter1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="bmpperimeter" input id="addbmpperimeter1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-	Are permament and temporary control practices properly installed and maintained?
-	<div class="controls">
-		<label class="control-label" >Erosion controls</label>
-		<label class="radio">
-		<input type="radio" name="bmperosion" input id="addbmperosion1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="bmperosion" input id="addbmperosion1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-		<label class="control-label" >Sediment controls</label>
-		<label class="radio">
-		<input type="radio" name="bmpsediment" input id="addbmpsediment1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="bmpsediment" input id="addbmpsediment1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-	<div class="controls">
-		<label class="control-label" for="bmpcomments">If NO to above questions, what corrective action is recommended</label>
-		<textarea id="addbmpcomments1" class="span10" required placeholder="Comments on BMPS">	
-		</textarea>
-	</div>
-	<div class="controls">
-		<label class="control-label" >Are BMPs being selected, installed , implemented, and maintained as stated in the SWPPP?</label>
-		<label class="radio">
-		<input type="radio" name="bmpperswppp" input id="addbmpperswppp1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="bmpperswppp" input id="addbmpperswppp1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-	<div class="controls">
-		<label class="control-label" >Is the SWPPP being updated as needed to address problems and construction activities?</label>
-		<label class="radio">
-		<input type="radio" name="swpppmatchphase" input id="addswpppmatchphase1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="swpppmatchphase" input id="addswpppmatchphase1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-	<div class="controls">
-		<label class="control-label" >Are the BMPs adequate for water quality measures?</label>
-		<label class="radio">
-		<input type="radio" name="bmpgood" input id="addbmpgood1" value="true">
-		<span class="label label-success">Yes</span>
-		</label>
-		<label class="radio">
-		<input type="radio" name="bmpgood" input id="addbmpgood1" value="false">
-		<span class="label label-important">No</span>
-		</label>
-	</div>
-		<div class="controls" >
-			<label class="control-label" for="issuecomments">Describe issue and recommended actions</label>
-			<textarea id="addissuecomments1"  class="span6" required placeholder="Please provide a detailed description of concerns and actions that are needed to resolve the issue">	
-			</textarea>
-		</div>
-	<div class="controls">
-			<label class="control-label" >Is follow-up required?</label>
-			<label class="radio">
-			<input type="radio" name="followupneed" input id="addfollowupneed1" value="true">
-			<span class="label label-success">Yes</span>
-			</label>
-			<label class="radio">
-			<input type="radio" name="followupneed" input id="addfollowupneed1" value="false">
-			<span class="label label-important">No</span>
-			</label>
-			<label class="control-label" >Rate concern of item</label>
-			<input list="followupconcern" name="rating" input id="addrating1" required placeholder="Aaaagh!"> 
-		</div>  </accordion-group> 
-<!-- Swppp Quick -->
-<accordion-group heading="SWPPP Quick">
- <h2>SWPPP Quick Inspection Form</h2>
-     <div class="control-group">
- 		<div class="controls">
- 			<label class="control-label" for="project">Project</label>
- 			<input type="text" name="project" input id="addprojectname2" required placeholder="Project Name"> 
- 			<label class="control-label" for="projectnumber">Project number</label>
- 			<input type="text" name="projectnumber" input id="addprojectnumber2" required placeholder="Project SWPPP Number"> 
- 		</div>
-		<div class="controls">
-           	         <label class="control-label" for="inspdate">Inspection Date</label>
-           		<input type="date" name="inspdate" input id="addinspdate2"> 
-		</div>
-		<div class="controls">
-			<label class="control-label" >Is follow-up required?</label>
-			<label class="radio">
-			<input type="radio" name="followupneed" input id="addfollowupneed2" value="true">
-			<span class="label label-success">Yes</span>
-			</label>
-			<label class="radio">
-			<input type="radio" name="followupneed" input id="addfollowupneed2" value="false">
-			<span class="label label-important">No</span>
-			</label>
-			<label class="control-label" >Rate concern of item</label>
-			<input list="followupconcern" name="rating" input id="addrating2" required placeholder="Aaaagh!"> 
-		</div>
-		<div class="controls" >
-			<label class="control-label" for="issuecomments">Describe issue and recommended actions</label>
-			<textarea id="addissuecomments2"  class="span6" required placeholder="Please provide a detailed description of concerns and actions that are needed to resolve the issue">	
-			</textarea>
-		</div>
-	</div>
+		</div> 
+		<td class="menu">
+                <span class="info">{{status}}</span>
+                <span ng-show="error != undefined" class="error">{{error}}</span>
+				<button ng-click="newinspection()">New</button>
+				<button ng-click="saveinspection()" ng-disabled="oversite.$invalid || isUnchanged(inspection) || !!!project.name ">Save</button>
+		</td>
+	</form>
 	</accordion-group>
+
+
 <!-- Waranty -->
 <accordion-group heading="Warranty Inspection">
 Warranty
@@ -444,16 +211,17 @@ Warranty
            
 
 </accordion-group>            
-<
+
    
   <accordion-group heading="Search">
   search
   </accordion-group>
-   
+</accordion>
+</div>
+
 </div>
 </div>
-</div>
-    </accordion>
+
 </div>
 <tr><td class="footer" colspan="3">
             Based on code by Jos de Jong, 2011-2012,

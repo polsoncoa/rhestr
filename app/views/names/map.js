@@ -1,5 +1,5 @@
-function map(doc, username) {
+function map(doc) {
     if (doc.name) {
-        emit(doc.name, doc.inspector);
+        emit(doc.name, doc.name);
     }
 }

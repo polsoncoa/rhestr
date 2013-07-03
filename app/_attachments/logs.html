@@ -102,16 +102,15 @@
                 </p>
                 <p class="info" ng-show="searchlimited">more...</p>
             </td>
-            </div>
+</div>
+
 <div class="span10">  
 <label class="checkbox">
     <input type="checkbox" ng-model="oneAtATime">
     Open only one at a time
   </label>
 <accordion close-others="oneAtATime">
-<accordion-group heading="Pick a Project">
 
-</accordion-group>
 <accordion-group heading="Review/Edit Project Information">
 <td class="project">
         <h2>Project</h2> 
@@ -133,10 +132,13 @@
                 </table>
                	<br>
                	<table>
-                    <tr><th>Latitude</th><td><input type="text" ng-model="project.latitude"  placeholder="34.XXXX"/></td><td></td><th>Longitude</th><td><input type="text" ng-model="project.longitude" placeholder="-102.XXXX negative!" /></td></tr>
-                </table>
+                    <tr><th>Latitude</th><td><input type="text" ng-model="project.latitude"  placeholder="34.XXXX"/></td><td></td>
+					<th>Longitude</th><td><input type="text" ng-model="project.longitude" placeholder="-102.XXXX negative!" /></td></tr>
+                	<tr><th>Status</th><td><input list="projectstatus" ng-model="project.status" /></td><td></td>
+					<th>Closeout Date</th><td><input type="date" name="closeoutdate" ng-model="project.closeoutdate"></td></tr>
+				</table>
                	<br>
-               	<b>Contact</b><br>
+               	<h3>Contact</h3>
                	<div ng-repeat="contact in project.contact">
                     <select ng-model="contact.type">
                         <option value="Phone">Phone</option>
@@ -151,32 +153,27 @@
                 </p>
             </td>
             <td class="reports">
-                <h2>Reports</h2>
+                <h3>Reports</h3>
                 <input type="button" value="Add" ng-click="addReport()">
                 <div ng-repeat="report in project.reports" class="report">
                     <table class="report">
-                        <tr><th>Date</th><td>
-                            <input type="text" ng-model="report.date" />
-                        </td><td>
-                            <a ng-click="removeReport(report)" class="remove" href="#">&times;</a>
-                        </td></tr>
-                        <tr><th>Bill</th><td><input type="text" ng-model="report.bill" /></td><td></td></tr>
-                        <tr><th>Payed</th><td><input type="checkbox" ng-model="report.payed" /></td><td></td></tr>
-                        <tr><th>Report</th><td>
-                            <textarea type="text" ng-model="report.report" class="report"></textarea>
-                        </td><td></td></tr>
+                        <tr><th>Resolved</th><td><input type="checkbox" ng-model="report.resolved" /></td></tr>
+						<tr><th>Date</th><td><input type="date" ng-model="report.date" /></td>
+                        <th>Report</th><td><input type="text" ng-model="report.report" /></td>
+						<td><a ng-click="removeReport(report)" class="remove" href="#">&times;</a></td></tr>
+                        <tr><th>Detail</th><td><textarea type="text" ng-model="report.detail" class="report"></textarea></td></tr>
                     </table>
                 </div>
             </td>
       </accordion-group>
 <!--   Inspection tabs -->
 <!--  Oversite  -->
-<accordion-group heading="Oversight Inspection">
-     <h2>Oversight Inspection Form {{project.name}}   {{project.number}}</h2>
-	 
-	  <h3>{{project._id}}</h3>
-     <form name="oversite" clss="css-form" novalidate>
-     	Inspection Date:<input type="date" name="inspdate" ng-model="inspection.date"> 
+<accordion-group  heading="Oversight Inspection">
+    <h2>Oversight Inspection Form <br>
+	{{project.name}} {{project.number}}</h2>
+	<h3>{{project._id}}</h3>
+    <form name="oversite" clss="css-form" novalidate>
+     	Inspection Date:<input type="date" name="inspdate" required ng-model="inspection.date"> 
         Weather:<input list="wxlist" name="wx" ng-model="inspection.wx" required placeholder="Weather"> <br>
 		Is follow-up required?:
 			<label class="radio">
@@ -198,9 +195,9 @@
                 <span class="info">{{status}}</span>
                 <span ng-show="error != undefined" class="error">{{error}}</span>
 				<button ng-click="newinspection()">New</button>
-				<button ng-click="saveinspection()" ng-disabled="oversite.$invalid || isUnchanged(inspection)">Save</button>
+				<button ng-click="saveinspection()" ng-disabled="oversite.$invalid || isUnchanged(inspection) || !!!project.name ">Save</button>
 		</td>
-		</form>
+	</form>
 	</accordion-group>
 
 
@@ -219,11 +216,12 @@ Warranty
   <accordion-group heading="Search">
   search
   </accordion-group>
-   
+</accordion>
+</div>
+
 </div>
 </div>
-</div>
-    </accordion>
+
 </div>
 <tr><td class="footer" colspan="3">
             Based on code by Jos de Jong, 2011-2012,

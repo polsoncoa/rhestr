@@ -14,6 +14,7 @@ function Projects($scope) {
     $scope.searchinfo = '';
     $scope.searchtext = '';
     $scope.searchresults = [];
+	var projectopen = 0;
 
     // instantiate a couchdb client. Create the database url based on our location
     var parts = window.location.href.split('/');
@@ -24,11 +25,11 @@ function Projects($scope) {
     var db = parts.pop();
     $.couch.urlPrefix = parts.join('/');
     var couch = $.couch.db(db);
-//accordion and toggle buttons
-  $scope.oneAtATime = true;
-  $scope.isCollapsed = false;
+    //accordion and toggle buttons
+    $scope.oneAtATime = true;
+    $scope.isCollapsed = false;
   
-// add a review of inspection report
+    // add a review of inspection report
     $scope.reviewinspection = function () {
         if (!$scope.inspection.review) {
             $scope.inspection.review = [];
@@ -36,7 +37,7 @@ function Projects($scope) {
         }
         $scope.inspection.review.splice(0, 0, {"date": (new Date()).toDateString()} );
     };
- 
+	
     // add a report to the current project
     $scope.addReport = function () {
         if (!$scope.project.reports) {
@@ -89,6 +90,7 @@ function Projects($scope) {
     $scope.saveproject = function () {
         $scope.error = undefined;
         $scope.project.updated = new Date();
+		$scope.project.type = "project";
         $scope.status = 'saving...';
         couch.saveDoc($scope.project, {
             success: function (resp) {
@@ -104,10 +106,12 @@ function Projects($scope) {
     };
 	$scope.saveinspection = function () {
         $scope.error = undefined;
+		$scope.inspection.type = "inspection";
 		$scope.inspection.inspector = username;
 		$scope.inspection.projectid = $scope.project._id;
 		$scope.inspection.projectname = $scope.project.name;
         $scope.inspection.updated = new Date();
+		$scope.inspection.reviewed = "false";
         $scope.status = 'saving...';
         couch.saveDoc($scope.inspection, {
             success: function (resp) {
@@ -131,11 +135,13 @@ function Projects($scope) {
     $scope.loadproject = function (id) {
         $scope.error = undefined;
         $scope.status = 'loading...';
-        couch.openDoc(id, {
+		couch.openDoc(id, {
             success: function (doc) {
                 $scope.status = '';
                 $scope.project = doc;
                 $scope.$apply();
+				projectopen=1;
+				console.log(projectopen);
             },
             error: function (err) {
                 $scope.error = undefined;
@@ -143,7 +149,7 @@ function Projects($scope) {
             }
         });
     };
-	  $scope.loadinspection = function (id) {
+	$scope.loadinspection = function (id) {
         $scope.error = undefined;
         $scope.status = 'loading...';
         couch.openDoc(id, {
@@ -255,5 +261,58 @@ function Projects($scope) {
 
     // initially load the recent files
     $scope.search();
+	 /**
+     * Perform a search request to CouchDB inspections.
+     * - If searchtext is empty, the most recent documents will be retrieved.
+     * - If searchtext is non-empty, documents with matching names will be retrieved.**/
+     /**
+    $scope.searchinspections = function () {
+        var searchinspectionsinfo;
+
+        // callback on search success
+        var onSuccess = function (view) {
+            $scope.searchlimitedinspections = (view.rows.length > SEARCH_LIMIT);
+            if ($scope.searchlimitedinspections) {
+                view.rows.pop();
+            }
+            $scope.searchinspectionsinfo = searchinspectionsinfo;
+            $scope.searchinspectionsresults = view.rows;
+            $scope.$apply();
+        };
+
+        // callback on search error
+        var onError = function (err) {
+            var onDesperate = function (err) {
+                $scope.error = err;
+                $scope.$apply();
+            };
+        };
+
+        if ($scope.searchinspectionstext.length == 0) {
+            // load most recent files
+            searchinspectionsinfo = 'most recent files:';
+            couch.view('app/recentinspections', {
+                descending: true,
+                limit: SEARCH_LIMIT,
+                success: onSuccess,
+                error: onError
+            });
+        }
+        else {
+            // load search results
+            searchinspectionsinfo = 'search results:';
+            couch.view('app/inspectionsbyinspector', {
+                startkey: $scope.searchinspectionstext,
+                endkey: $scope.searchinspectionstext + 'Z',
+                limit: (SEARCH_LIMIT + 1),  // +1 so we know if there were more results available
+                success: onSuccess,
+                error: onError
+            });
+        }
+    };
+
+    // initially load the recent files
+    $scope.searchinspections();
+	**/
 }
 
